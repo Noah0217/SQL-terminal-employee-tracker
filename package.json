@@ -8,5 +8,10 @@
     "start": "node server.js"
   },
   "author": "Noah Mejia",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.1.2",
+    "mysql2": "^2.3.0"
+  }
 }
