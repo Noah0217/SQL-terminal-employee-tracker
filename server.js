@@ -11,8 +11,9 @@ const connection = require('./config/connections');
 const PORT = process.env.PORT || 3000;
 
 //connection to database and figlet title
-connection.connect((error) => {
-if (error) throw error;
+connection.connect(function(err) {
+    if (err) throw err
+
 console.log(chalk.orange.bold('==================================================================='));
 console.log('');
 console.log(chalk.greenBright.bold(figlet.textSync('Employee Tracker')));
@@ -40,7 +41,7 @@ const choicesPrompt = () => {
         }
     ])
 
-    //
+    //choices function
     .then((answers) => {
         const {choices} = answers;
   
