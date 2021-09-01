@@ -48,56 +48,29 @@ const choicesPrompt = () => {
               viewAllEmployees();
           }
   
-          if (choices === 'View All Departments') {
-            viewAllDepartments();
-        }
+          if (choices === 'View All Roles') {
+            viewAllRoles();
+          }
   
           if (choices === 'View All Employees By Department') {
               viewEmployeesByDepartment();
           }
-  
-          if (choices === 'Add Employee') {
-              addEmployee();
-          }
-  
-          if (choices === 'Remove Employee') {
-              removeEmployee();
-          }
-  
+
           if (choices === 'Update Employee Role') {
               updateEmployeeRole();
           }
-  
-          if (choices === 'Update Employee Manager') {
-              updateEmployeeManager();
+          
+          if (choices === 'Add Employee') {
+              addEmployee();
           }
-  
-          if (choices === 'View All Roles') {
-              viewAllRoles();
-          }
-  
+
           if (choices === 'Add Role') {
-              addRole();
+                addRole();
           }
-  
-          if (choices === 'Remove Role') {
-              removeRole();
-          }
-  
+
           if (choices === 'Add Department') {
-              addDepartment();
+                addDepartment();
           }
-  
-          if (choices === 'View Department Budgets') {
-              viewDepartmentBudget();
-          }
-  
-          if (choices === 'Remove Department') {
-              removeDepartment();
-          }
-  
-          if (choices === 'Exit') {
-              connection.end();
-          }
+    
     });
   };
