@@ -8,7 +8,7 @@ const connection = mysql.createConnection({  ////https://www.tabnine.com/code/ja
     port: 3306,
     user: 'root',
     password: process.env.DB_PASS,
-    database: "employee-tracker"
+    database: "employee_tracker"
 });
 
 module.export = connection;
