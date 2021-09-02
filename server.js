@@ -39,10 +39,8 @@ const choicesPrompt = () => {
                 "Add Department?"
             ]
         }
-    ])
-
-    //choices function
-    .then((answers) => {
+        //choices
+    ]).then((answers) => {
         const {choices} = answers;
   
           if (choices === 'View All Employees') {
@@ -73,5 +71,7 @@ const choicesPrompt = () => {
                 addDepartment();
           }
     
-    });
+    })
   };
+
+  
