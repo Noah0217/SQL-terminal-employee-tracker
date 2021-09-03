@@ -120,7 +120,7 @@ function viewEmployeesByDepartment() {
               }
               return lastName;
             },
-            message: "What is the Employee's last name? ",
+            message: "What is the Employee's last name?",
           },
           {
             name: "role",
