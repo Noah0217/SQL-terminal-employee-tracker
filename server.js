@@ -5,7 +5,7 @@ const CTable = require('console.table')
 const chalk = require('chalk')  //https://www.npmjs.com/package/chalk
 const figlet = require('figlet')  //https://www.npmjs.com/package/figlet
 require("dotenv").config();  //https://www.npmjs.com/package/dotenv
-const connection = require('./config/connections');
+const connection = require('./config/connection');
 
 //port to live server
 const PORT = process.env.PORT || 3000;
@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 3000;
 connection.connect(function(err) {
     if (err) throw err
 
-console.log(chalk.orange.bold('==================================================================='));
-console.log('');
-console.log(chalk.greenBright.bold(figlet.textSync('Employee Tracker')));
-console.log('');
-    console.log(chalk.orange.bold(`===================================================================`));
+// console.log(chalk.orange('==================================================================='));
+// console.log('');
+// console.log(chalk.greenBright(figlet.textSync('Employee Tracker')));
+// console.log('');
+//     console.log(chalk.orange(`===================================================================`));
     choicesPrompt();
 });
 
@@ -185,6 +185,6 @@ function viewEmployeesByDepartment() {
 
 
 //successfully connected to port
-app.listen(PORT, () => 
-console.log(`successfully connected to http://localhost:${PORT}`)); 
+// app.listen(PORT, () => 
+// console.log(`successfully connected to http://localhost:${PORT}`)); 
   
