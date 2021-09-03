@@ -11,4 +11,4 @@ const connection = mysql.createConnection({  ////https://www.tabnine.com/code/ja
     database: "employee_tracker"
 });
 
-module.export = connection;
+module.exports = connection;
