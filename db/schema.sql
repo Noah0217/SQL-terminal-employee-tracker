@@ -1,7 +1,7 @@
 --deleting data base if already exist and creating a new one
-DROP DATABASE IF EXIST employee-tracker;
-CREATE DATABASE employee-tracker;
-USE employee-tracker;  --https://dev.mysql.com/doc/refman/8.0/en/use.html
+DROP DATABASE IF EXIST employee_tracker;
+CREATE DATABASE employee_tracker;
+USE employee_tracker;  --https://dev.mysql.com/doc/refman/8.0/en/use.html
 
 --department table
 CREATE TABLE department (
