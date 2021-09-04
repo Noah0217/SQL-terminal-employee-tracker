@@ -5,12 +5,24 @@ const cTable = require('console.table');
 const chalk = require('chalk');  //https://www.npmjs.com/package/chalk
 const figlet = require('figlet');  //https://www.npmjs.com/package/figlet
 require("dotenv").config();  //https://www.npmjs.com/package/dotenv
-const connection = require('./config/connection');
+//const connection = require('./config/connection');
 
-//connection to database and figlet title
+//connection to database
+const connection = mysql.createConnection({  ////https://www.tabnine.com/code/javascript/functions/mysql/createConnection
+    host: "localhost",
+    port: 3306,
+    user: 'root',
+    password: process.env.DB_PASS,
+    database: "employee_tracker"
+},
+console.log('Successfully connected to Employee_tracker database')
+);
+
+//figlet title
 connection.connect(function(err) {
     if (err) throw err
 
+    //figlet title 
     console.log(chalk.magentaBright.bold(`====================================================================================`));
     console.log('');
     console.log(chalk.blue.bold(figlet.textSync('Employee Tracker')));
@@ -38,6 +50,7 @@ const choicesPrompt = () => {
             ]
         }
     ])
+    
 // choices to match prompt
     .then((answers) => {
         const {choices} = answers;
@@ -76,7 +89,7 @@ const choicesPrompt = () => {
   //view all employees
   function viewAllEmployees() {
     connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;", 
-    function(err, res) {
+    function(err, results) {
       if (err) throw err
       console.table(results);
       choicesPrompt()
@@ -86,7 +99,7 @@ const choicesPrompt = () => {
 //view all employees by roles
 function viewAllRoles() {
     connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
-    function(err, res) {
+    function(err, results) {
     if (err) throw err
     console.table(results);
     choicesPrompt()
@@ -96,7 +109,7 @@ function viewAllRoles() {
 //view all employees by departments
 function viewEmployeesByDepartment() {
     connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;", 
-    function(err, res) {
+    function(err, results) {
       if (err) throw err
       console.table(results);
       choicesPrompt()
@@ -107,15 +120,15 @@ function viewEmployeesByDepartment() {
   function updateEmployee() {
     connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
      if (err) throw err
-     console.log(res)
+     console.log(results)
     inquirer.prompt([
           {
             name: "lastName",
             type: "rawlist",
             choices: function() {
               var lastName = [];
-              for (var i = 0; i < res.length; i++) {
-                lastName.push(res[i].last_name);
+              for (var i = 0; i < results.length; i++) {
+                lastName.push(results[i].last_name);
               }
               return lastName;
             },
