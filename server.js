@@ -1,9 +1,9 @@
 //dependencies
-const inquirer = require("inquirer")
-const mysql = require("mysql2")
-const CTable = require('console.table')
-const chalk = require('chalk')  //https://www.npmjs.com/package/chalk
-const figlet = require('figlet')  //https://www.npmjs.com/package/figlet
+const inquirer = require("inquirer");
+const mysql = require("mysql2");
+const CTable = require('console.table');
+const chalk = require('chalk');  //https://www.npmjs.com/package/chalk
+const figlet = require('figlet');  //https://www.npmjs.com/package/figlet
 require("dotenv").config();  //https://www.npmjs.com/package/dotenv
 const connection = require('./config/connection');
 
@@ -14,11 +14,12 @@ const PORT = process.env.PORT || 3000;
 connection.connect(function(err) {
     if (err) throw err
 
-// console.log(chalk.orange('==================================================================='));
-// console.log('');
-// console.log(chalk.greenBright(figlet.textSync('Employee Tracker')));
-// console.log('');
-//     console.log(chalk.orange(`===================================================================`));
+    console.log(chalk.magentaBright.bold(`====================================================================================`));
+    console.log('');
+    console.log(chalk.blue.bold(figlet.textSync('Employee Tracker')));
+    console.log('');
+    console.log('');
+    console.log(chalk.magentaBright.bold(`====================================================================================`));
     choicesPrompt();
 });
 
@@ -156,7 +157,7 @@ function viewEmployeesByDepartment() {
 
 
 
-  
+
   //Select Role Queries The Managers for Add Employee Prompt
   var managersArr = [];
 function selectManager() {
