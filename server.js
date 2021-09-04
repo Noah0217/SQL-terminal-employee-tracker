@@ -1,14 +1,11 @@
 //dependencies
-const inquirer = require("inquirer");
-const mysql = require("mysql2");
-const CTable = require('console.table');
+const inquirer = require('inquirer');
+const mysql = require('mysql2');
+const cTable = require('console.table');
 const chalk = require('chalk');  //https://www.npmjs.com/package/chalk
 const figlet = require('figlet');  //https://www.npmjs.com/package/figlet
 require("dotenv").config();  //https://www.npmjs.com/package/dotenv
 const connection = require('./config/connection');
-
-//port to live server
-const PORT = process.env.PORT || 3000;
 
 //connection to database and figlet title
 connection.connect(function(err) {
@@ -40,8 +37,9 @@ const choicesPrompt = () => {
                 "Add Department?"
             ]
         }
-        //choices
-    ]).then((answers) => {
+    ])
+// choices to match prompt
+    .then((answers) => {
         const {choices} = answers;
   
           if (choices === 'View All Employees') {
@@ -85,7 +83,7 @@ const choicesPrompt = () => {
   })
 }
 
-//view all roles
+//view all employees by roles
 function viewAllRoles() {
     connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
     function(err, res) {
@@ -95,7 +93,7 @@ function viewAllRoles() {
     })
   }
 
-//view all employees in departments
+//view all employees by departments
 function viewEmployeesByDepartment() {
     connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;", 
     function(err, res) {
@@ -153,101 +151,46 @@ function viewEmployeesByDepartment() {
 
   }
 
-
-
-
-
-
-  //Select Role Queries The Managers for Add Employee Prompt
-  var managersArr = [];
-function selectManager() {
-  connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, res) {
-    if (err) throw err
-    for (var i = 0; i < res.length; i++) {
-      managersArr.push(res[i].first_name);
-    }
+  //add employee
+  function addEmployee() { 
+    inquirer.prompt([
+        {
+          name: "firstname",
+          type: "input",
+          message: "Enter their first name "
+        },
+        {
+          name: "lastname",
+          type: "input",
+          message: "Enter their last name "
+        },
+        {
+          name: "role",
+          type: "list",
+          message: "What is their role? ",
+          choices: selectRole()
+        },
+        {
+            name: "choice",
+            type: "rawlist",
+            message: "Whats their managers name?",
+            choices: selectManager()
+        }
+    ]).then(function (val) {
+      var roleId = selectRole().indexOf(val.role) + 1
+      var managerId = selectManager().indexOf(val.choice) + 1
+      connection.query("INSERT INTO employee SET ?", 
+      {
+          first_name: val.firstName,
+          last_name: val.lastName,
+          manager_id: managerId,
+          role_id: roleId
+          
+      }, function(err){
+          if (err) throw err
+          console.table(val)
+          choicesPrompt()
+      })
 
   })
-  return managersArr;
 }
-
-//add employee
-function addEmployee() { 
-  inquirer.prompt([
-      {
-        name: "firstname",
-        type: "input",
-        message: "Enter their first name "
-      },
-      {
-        name: "lastname",
-        type: "input",
-        message: "Enter their last name "
-      },
-      {
-        name: "role",
-        type: "list",
-        message: "What is their role? ",
-        choices: selectRole()
-      },
-      {
-          name: "choice",
-          type: "rawlist",
-          message: "Whats their managers name?",
-          choices: selectManager()
-      }
-  ]).then(function (val) {
-    var roleId = selectRole().indexOf(val.role) + 1
-    var managerId = selectManager().indexOf(val.choice) + 1
-    connection.query("INSERT INTO employee SET ?", 
-    {
-        first_name: val.firstName,
-        last_name: val.lastName,
-        manager_id: managerId,
-        role_id: roleId
-        
-    }, function(err){
-        if (err) throw err
-        console.table(val)
-        startPrompt()
-    })
-
-})
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//successfully connected to port
-// app.listen(PORT, () => 
-// console.log(`successfully connected to http://localhost:${PORT}`)); 
-  
