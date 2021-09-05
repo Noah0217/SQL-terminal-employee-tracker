@@ -16,4 +16,4 @@
 
 <h2>Preview<h2>
   
-img src= 
+<img src="" width="1600" height="450"/>
