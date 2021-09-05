@@ -27,7 +27,6 @@ connection.connect(function(err) {
     console.log('');
     console.log(chalk.blue.bold(figlet.textSync('Employee Tracker')));
     console.log('');
-    console.log('');
     console.log(chalk.magentaBright.bold(`====================================================================================`));
     choicesPrompt();
 });
