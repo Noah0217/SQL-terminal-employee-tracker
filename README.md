@@ -1,9 +1,6 @@
 # Employee Table Tracker
 
 <h2>Description<br><h4>A server based application used to take notes and have them saved and ready to use when ever you need them.
-<h3 align="left">App Deployed Here</h3>
-  
-- https://note-taker-noah.herokuapp.com/
   
 <h3 align="left">💻Languages and Tools🛠️</h3>
 
