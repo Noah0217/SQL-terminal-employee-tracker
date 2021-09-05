@@ -7,15 +7,18 @@ const figlet = require('figlet');  //https://www.npmjs.com/package/figlet
 require("dotenv").config();  //https://www.npmjs.com/package/dotenv
 //const connection = require('./config/connection');
 
+//port
+//const PORT = process.env.PORT || 3000;
+
 //connection to database
 const connection = mysql.createConnection({  ////https://www.tabnine.com/code/javascript/functions/mysql/createConnection
     host: "localhost",
-    port: 3306,
-    user: 'root',
-    password: process.env.DB_PASS,
-    database: "employee_tracker"
+    port: 3306,   //default port to MySQL
+    user: 'root',  //my username to MySQL
+    password: process.env.DB_PASS,  //my password to MySQL
+    database: "employee_tracker"  //database name
 },
-console.log('Successfully connected to Employee_tracker database')
+console.log('Successfully connected to employee_tracker database') //connected to database
 );
 
 //figlet title
@@ -28,10 +31,13 @@ connection.connect(function(err) {
     console.log(chalk.blue.bold(figlet.textSync('Employee Tracker')));
     console.log('');
     console.log(chalk.magentaBright.bold(`====================================================================================`));
+
+    //start prompt
     choicesPrompt();
+
 });
 
-//choices prompt
+//initial choices prompt
 const choicesPrompt = () => {
     inquirer.prompt([
         {
@@ -47,10 +53,12 @@ const choicesPrompt = () => {
                 "Add Role?",
                 "Add Department?"
             ]
+
         }
+
     ])
     
-// choices to match prompt
+// choices to match prompt's functions
     .then((answers) => {
         const {choices} = answers;
   
@@ -58,7 +66,7 @@ const choicesPrompt = () => {
               viewAllEmployees();
           }
   
-          if (choices === 'View All Roles?') {
+          if (choices === 'View All Employees By Roles?') {
               viewAllRoles();
           }
   
@@ -83,6 +91,7 @@ const choicesPrompt = () => {
           }
     
     })
+
   }
 
   //view all employees
@@ -93,6 +102,7 @@ const choicesPrompt = () => {
       console.table(results);
       choicesPrompt()
   })
+
 }
 
 //view all employees by roles
@@ -103,6 +113,7 @@ function viewAllRoles() {
     console.table(results);
     choicesPrompt()
     })
+
   }
 
 //view all employees by departments
@@ -113,6 +124,7 @@ function viewEmployeesByDepartment() {
       console.table(results);
       choicesPrompt()
     })
+
   }
 
   //update employee
@@ -159,6 +171,7 @@ function viewEmployeesByDepartment() {
         })
   
     });
+
   });
 
   }
@@ -205,32 +218,110 @@ function viewEmployeesByDepartment() {
       })
 
   })
+
 }
 
-
-
-var roleArr = [];
-function selectRole() {
-  connection.query("SELECT * FROM role", function(err, res) {
+//manager id NULL when already manager
+var managersArr = [];
+function selectManager() {
+  connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, results) {
     if (err) throw err
-    for (var i = 0; i < res.length; i++) {
-      roleArr.push(res[i].title);
+    for (var i = 0; i < results.length; i++) {
+      managersArr.push(results[i].first_name);
+    }
+
+  })
+  return managersArr;
+}
+
+//add role
+function addRole() { 
+  connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role",   function(err, results) {
+    inquirer.prompt([
+        {
+          name: "Title",
+          type: "input",
+          message: "What is the roles Title?"
+        },
+        {
+          name: "Salary",
+          type: "input",
+          message: "What is the Salary?"
+
+        } 
+    ]).then(function(results) {
+        connection.query(
+            "INSERT INTO role SET ?",
+            {
+              title: results.Title,
+              salary: results.Salary,
+            },
+            function(err) {
+                if (err) throw err
+                console.table(results);
+                choicesPrompt();
+            }
+        )
+
+    });
+  });
+  }
+  var roleArr = [];
+function selectRole() {
+  connection.query("SELECT * FROM role", function(err, results) {
+    if (err) throw err
+    for (var i = 0; i < results.length; i++) {
+      roleArr.push(results[i].title);
     }
 
   })
   return roleArr;
 }
 
+//add department
+  function addDepartment() { 
+
+    inquirer.prompt([
+        {
+          name: "name",
+          type: "input",
+          message: "What Department would you like to add?"
+        }
+    ]).then(function(results) {
+        var query = connection.query(
+            "INSERT INTO department SET ? ",
+            {
+              name: results.name
+            
+            },
+            function(err) {
+                if (err) throw err
+                console.table(results);
+                choicesPrompt();
+            }
+
+        )
+
+    })
+
+  }
 
 
-var managersArr = [];
-function selectManager() {
-  connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, res) {
-    if (err) throw err
-    for (var i = 0; i < res.length; i++) {
-      managersArr.push(res[i].first_name);
-    }
 
-  })
-  return managersArr;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   //successfully connected to port
+// app.listen(PORT, () => 
+// console.log(`successfully connected to http://localhost:${PORT}`));
