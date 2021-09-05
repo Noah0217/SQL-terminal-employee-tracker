@@ -38,12 +38,12 @@ const choicesPrompt = () => {
         {
             type : "list",
             message: "Please select an action below",
-            name: "choice",
+            name: "choices",
             choices: [
                 "View All Employees?", 
                 "View All Employee's By Roles?",
-                "View all Employees By Departments", 
-                "Update Employee",
+                "View all Employees By Departments?", 
+                "Update Employee?",
                 "Add Employee?",
                 "Add Role?",
                 "Add Department?"
@@ -55,32 +55,32 @@ const choicesPrompt = () => {
     .then((answers) => {
         const {choices} = answers;
   
-          if (choices === 'View All Employees') {
+          if (choices === 'View All Employees?') {
               viewAllEmployees();
           }
   
-          if (choices === 'View All Roles') {
-            viewAllRoles();
+          if (choices === 'View All Roles?') {
+              viewAllRoles();
           }
   
-          if (choices === 'View All Employees By Department') {
+          if (choices === 'View All Employees By Department?') {
               viewEmployeesByDepartment();
           }
 
-          if (choices === 'Update Employee Role') {
+          if (choices === 'Update Employee Role?') {
               updateEmployee();
           }
           
-          if (choices === 'Add Employee') {
+          if (choices === 'Add Employee?') {
               addEmployee();
           }
 
-          if (choices === 'Add Role') {
-                addRole();
+          if (choices === 'Add Role?') {
+              addRole();
           }
 
-          if (choices === 'Add Department') {
-                addDepartment();
+          if (choices === 'Add Department?') {
+              addDepartment();
           }
     
     })
