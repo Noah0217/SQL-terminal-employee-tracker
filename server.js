@@ -182,17 +182,17 @@ function viewEmployeesByDepartment() {
         {
           name: "firstname",
           type: "input",
-          message: "Enter their first name "
+          message: "Enter first name? "
         },
         {
           name: "lastname",
           type: "input",
-          message: "Enter their last name "
+          message: "Enter last name? "
         },
         {
           name: "role",
           type: "list",
-          message: "What is their role? ",
+          message: "What is there role? ",
           choices: selectRole()
         },
         {
@@ -241,12 +241,12 @@ function addRole() {
         {
           name: "Title",
           type: "input",
-          message: "What is the roles Title?"
+          message: "What is the role?"
         },
         {
           name: "Salary",
           type: "input",
-          message: "What is the Salary?"
+          message: "What is the salary?"
 
         } 
     ]).then(function(results) {
@@ -285,7 +285,7 @@ function selectRole() {
         {
           name: "name",
           type: "input",
-          message: "What Department would you like to add?"
+          message: "What department do you want to add?"
         }
     ]).then(function(results) {
         var query = connection.query(
