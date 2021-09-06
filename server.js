@@ -222,16 +222,16 @@ function viewEmployeesByDepartment() {
 }
 
 //manager id NULL when already manager
-var managersArr = [];
+var managersChoice = [];
 function selectManager() {
   connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, results) {
     if (err) throw err
     for (var i = 0; i < results.length; i++) {
-      managersArr.push(results[i].first_name);
+      managersChoice.push(results[i].first_name);
     }
 
   })
-  return managersArr;
+  return managersChoice;
 }
 
 //add role
