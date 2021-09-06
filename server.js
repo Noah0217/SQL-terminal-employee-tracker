@@ -266,16 +266,16 @@ function addRole() {
     });
   });
   }
-  var roleArr = [];
+  var roleChoice = [];
 function selectRole() {
   connection.query("SELECT * FROM role", function(err, results) {
     if (err) throw err
     for (var i = 0; i < results.length; i++) {
-      roleArr.push(results[i].title);
+      roleChoice.push(results[i].title);
     }
 
   })
-  return roleArr;
+  return roleChoice;
 }
 
 //add department
