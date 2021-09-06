@@ -151,7 +151,8 @@ function viewEmployeesByDepartment() {
             message: "What is the Employees new title? ",
             choices: selectRole()
           },
-      ]).then(function(val) {
+      ])
+      .then(function(val) {
         var roleId = selectRole().indexOf(val.role) + 1
         connection.query("UPDATE employee SET WHERE ?", 
         {
