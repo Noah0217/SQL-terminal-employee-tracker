@@ -192,13 +192,13 @@ function viewEmployeesByDepartment() {
         },
         {
           name: "role",
-          type: "list",
+          type: "input",
           message: "What is there role? ",
           choices: selectRole()
         },
         {
             name: "choice",
-            type: "rawlist",
+            type: "input",
             message: "Whats their managers name?",
             choices: selectManager()
         }
@@ -306,23 +306,3 @@ function selectRole() {
     })
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   //successfully connected to port
-// app.listen(PORT, () => 
-// console.log(`successfully connected to http://localhost:${PORT}`));
