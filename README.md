@@ -1,6 +1,6 @@
-# Employee Table Tracker
+# SQL Terminal Employee Table Tracker
 
-<h2>Description<br><h4>A server based application used to take notes and have them saved and ready to use when ever you need them.
+<h2>Description<br><h4>A terminal based application used to create and track employees, assign roles, department, salary and manager to any employee added to the database.
   
 <h3 align="left">💻Languages and Tools🛠️</h3>
 
