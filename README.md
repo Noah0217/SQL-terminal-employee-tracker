@@ -1,4 +1,4 @@
-# SQL Terminal Employee Table Tracker
+# SQL Terminal Employee Tracker
 
 <h2>Description<br><h4>A terminal based application used to create and track employees, assign roles, department, salary and manager to any employee added to the database.
   
