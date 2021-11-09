@@ -12,7 +12,8 @@
 - MySQL
 
   <h3 align="left">Installation</h3>
-- To start app open up the terminal and run node server.js and you'll be listed with diferent actions you'r able to do.
+- Run `node server.js` in terminal to start app.
+- Select action you want to do in terminal.
 
 <h2>Preview<h2>
   
