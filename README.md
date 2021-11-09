@@ -13,7 +13,7 @@
 
   <h3 align="left">Installation</h3>
 - Run `node server.js` in terminal to start app.
-- Select action you want to do in terminal.
+- Select an action you would like to do.
 
 <h2>Preview<h2>
   
