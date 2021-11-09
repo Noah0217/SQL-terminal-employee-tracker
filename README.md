@@ -17,4 +17,5 @@
 
 <h2>Preview<h2>
   
-<img src="https://raw.githubusercontent.com/Noah0217/employee-tracker-12/main/assets/week%2012%20challenge%20.png" width="625" height="350"/>
+  https://user-images.githubusercontent.com/84366215/140871556-39c937b0-4f52-4190-a5a7-f94b3b65e92e.mp4
+
