@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # SQL Terminal Employee Tracker
 
 <h2>Description<br><h4>A terminal based application used to create and track employees, assign roles, department, salary and manager to any employee, and added to the database.
